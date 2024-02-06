@@ -1,10 +1,13 @@
 package it.chiarapuleio.exdayone.exercise;
 
+import it.chiarapuleio.exdayone.exercise.abstractClass.SuperMenu;
 import it.chiarapuleio.exdayone.exercise.entities.*;
+import it.chiarapuleio.exdayone.exercise.enums.OrderStatus;
 import it.chiarapuleio.exdayone.exercise.enums.TableStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,5 +95,17 @@ public class BeansConfig {
     @Bean
     Table table13(){
         return new Table(13,6,TableStatus.FREE);
+    }
+
+    @Bean
+    Order order13(){
+        List<SuperMenu> orderItems = new ArrayList<>();
+        orderItems.add(getMargherita());
+        orderItems.add(getMargherita());
+        orderItems.add(getWater());
+        orderItems.add(getSalamiPizza());
+        orderItems.add(getWater());
+        table13().setTableStatus(TableStatus.OCCUPIED);
+        return new Order(table13(), orderItems, 45, OrderStatus.IN_PROGRESS, 3, LocalDate.now());
     }
 }
