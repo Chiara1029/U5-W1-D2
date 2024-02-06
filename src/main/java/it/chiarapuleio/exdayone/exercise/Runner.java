@@ -1,18 +1,25 @@
 package it.chiarapuleio.exdayone.exercise;
 
-import it.chiarapuleio.exdayone.exercise.entities.MenuList;
-import it.chiarapuleio.exdayone.exercise.entities.Order;
-import it.chiarapuleio.exdayone.exercise.entities.Table;
+import it.chiarapuleio.exdayone.exercise.abstractClass.SuperMenu;
+import it.chiarapuleio.exdayone.exercise.entities.*;
+import it.chiarapuleio.exdayone.exercise.enums.OrderStatus;
+import it.chiarapuleio.exdayone.exercise.enums.TableStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
+@PropertySource("application.properties")
 public class Runner implements CommandLineRunner {
-//    @Value("$rest.chargeCost")
-//    private double chargeCost;
+
+    private @Value("${rest.chargeCost}") double chargeCost;
     @Autowired
     private AnnotationConfigApplicationContext ctx;
 
@@ -26,8 +33,18 @@ public class Runner implements CommandLineRunner {
         System.out.println("----- TABLES -----");
         System.out.println(tb);
 
-        Order order = (Order) ctx.getBean("order13");
         System.out.println("----- ORDERS -----");
+        Pizza margherita = (Pizza) ctx.getBean("getMargherita");
+        Pizza salami = (Pizza) ctx.getBean("getSalamiPizza");
+        Drink water = (Drink) ctx.getBean("getWater");
+        List<SuperMenu> orderItems = new ArrayList<>();
+        orderItems.add(margherita);
+        orderItems.add(margherita);
+        orderItems.add(salami);
+        orderItems.add(water);
+        orderItems.add(water);
+        tb.setTableStatus(TableStatus.OCCUPIED);
+        Order order = new Order(tb, orderItems, 45, OrderStatus.IN_PROGRESS, 3, LocalTime.now());
         System.out.println(order);
 
         ctx.close();

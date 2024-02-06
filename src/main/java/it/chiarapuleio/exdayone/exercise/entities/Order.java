@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Random;
 
@@ -17,9 +18,9 @@ public class Order {
     private int numberOrd;
     private OrderStatus orderStatus;
     private int totalCostumers;
-    private LocalDate orderTime;
+    private LocalTime orderTime;
 
-    public Order(Table table, List<SuperMenu> orderList, int numberOrd, OrderStatus orderStatus, int totalCostumers, LocalDate orderTime) {
+    public Order(Table table, List<SuperMenu> orderList, int numberOrd, OrderStatus orderStatus, int totalCostumers, LocalTime orderTime) {
         this.table = table;
         this.orderList = orderList;
         this.numberOrd = numberOrd;
