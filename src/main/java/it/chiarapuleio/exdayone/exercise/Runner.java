@@ -5,10 +5,8 @@ import it.chiarapuleio.exdayone.exercise.entities.*;
 import it.chiarapuleio.exdayone.exercise.enums.OrderStatus;
 import it.chiarapuleio.exdayone.exercise.enums.TableStatus;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalTime;
