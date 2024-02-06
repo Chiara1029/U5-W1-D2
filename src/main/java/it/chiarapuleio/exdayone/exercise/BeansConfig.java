@@ -4,8 +4,10 @@ import it.chiarapuleio.exdayone.exercise.abstractClass.SuperMenu;
 import it.chiarapuleio.exdayone.exercise.entities.*;
 import it.chiarapuleio.exdayone.exercise.enums.OrderStatus;
 import it.chiarapuleio.exdayone.exercise.enums.TableStatus;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
+@PropertySource("application.properties")
 public class BeansConfig {
 
     // ----- TOPPINGS -----
@@ -98,4 +101,6 @@ public class BeansConfig {
         return new Table(13,4,TableStatus.FREE);
     }
 
+    @Bean
+    double tableCharge(@Value("${rest.chargeCost}")  double tableCharge) {return tableCharge;}
 }

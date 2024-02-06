@@ -4,11 +4,11 @@ import it.chiarapuleio.exdayone.exercise.abstractClass.SuperMenu;
 import it.chiarapuleio.exdayone.exercise.enums.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Random;
 
 @Getter
 @Setter
@@ -20,6 +20,7 @@ public class Order {
     private int totalCostumers;
     private LocalTime orderTime;
 
+
     public Order(Table table, List<SuperMenu> orderList, int numberOrd, OrderStatus orderStatus, int totalCostumers, LocalTime orderTime) {
         this.table = table;
         this.orderList = orderList;
@@ -27,6 +28,15 @@ public class Order {
         this.orderStatus = orderStatus;
         this.totalCostumers = totalCostumers;
         this.orderTime = orderTime;
+    }
+
+    public double getOrderPrice(List<SuperMenu> orderItems, double charge){
+        double orderPrice = 0.0;
+        for(SuperMenu item : orderItems){
+            orderPrice += item.getPrice();
+        }
+        orderPrice += charge*totalCostumers;
+        return orderPrice;
     }
 
     @Override

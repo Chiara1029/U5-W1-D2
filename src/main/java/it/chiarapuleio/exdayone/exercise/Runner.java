@@ -16,10 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@PropertySource("application.properties")
 public class Runner implements CommandLineRunner {
-
-    private @Value("${rest.chargeCost}") double chargeCost;
     @Autowired
     private AnnotationConfigApplicationContext ctx;
 
@@ -46,6 +43,9 @@ public class Runner implements CommandLineRunner {
         tb.setTableStatus(TableStatus.OCCUPIED);
         Order order = new Order(tb, orderItems, 45, OrderStatus.IN_PROGRESS, 3, LocalTime.now());
         System.out.println(order);
+        double charge = (double) ctx.getBean("tableCharge");
+        double price = order.getOrderPrice(orderItems, charge);
+        System.out.println("Totale ordine: " + price);
 
         ctx.close();
     }
