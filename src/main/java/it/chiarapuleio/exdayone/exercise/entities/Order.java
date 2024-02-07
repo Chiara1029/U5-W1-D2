@@ -39,6 +39,17 @@ public class Order {
         return orderPrice;
     }
 
+    public void printOrder(Order order) {
+        System.out.println("----- Order -----");
+        System.out.println("Table: " + order.getTable());
+        System.out.println("Order n°: " + order.getNumberOrd());
+        System.out.println("Customers: " + order.getTotalCostumers());
+        System.out.println("Status: " + order.getOrderStatus());
+        System.out.println("Time: " + order.getOrderTime());
+
+        this.orderList.forEach(System.out::println);
+    }
+
     @Override
     public String toString() {
         return "Order{" +

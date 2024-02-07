@@ -20,9 +20,10 @@ public class Runner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        MenuList ml = (MenuList) ctx.getBean("getMenu");
+//        MenuList ml = (MenuList) ctx.getBean("getMenu");
         System.out.println("----- MENU -----");
-        System.out.println(ml);
+        MenuList ml = (MenuList) ctx.getBean("menuList");
+        ml.printMenu();
 
         Table tb = (Table) ctx.getBean("table13");
         System.out.println("----- TABLES -----");
@@ -40,10 +41,10 @@ public class Runner implements CommandLineRunner {
         orderItems.add(water);
         tb.setTableStatus(TableStatus.OCCUPIED);
         Order order = new Order(tb, orderItems, 45, OrderStatus.IN_PROGRESS, 3, LocalTime.now());
-        System.out.println(order);
+        order.printOrder(order);
         double charge = (double) ctx.getBean("tableCharge");
         double price = order.getOrderPrice(orderItems, charge);
-        System.out.println("Totale ordine: " + price);
+        System.out.println("Total charge: " + price);
 
         ctx.close();
     }

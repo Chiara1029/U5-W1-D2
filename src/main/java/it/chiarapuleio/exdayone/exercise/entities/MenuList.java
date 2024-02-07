@@ -9,6 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@Component("menuList")
 public class MenuList {
     private List<Pizza> pizzaList;
     private List<Drink> drinkList;
@@ -18,6 +19,17 @@ public class MenuList {
         this.pizzaList = pizzaList;
         this.drinkList = drinkList;
         this.toppingsList = toppingsList;
+    }
+
+    public void printMenu() {
+        System.out.println("----- PIZZAS -----");
+        this.pizzaList.forEach(System.out::println);
+
+        System.out.println("----- TOPPINGS -----");
+        this.toppingsList.forEach(System.out::println);
+
+        System.out.println("----- DRINKS -----");
+        this.drinkList.forEach(System.out::println);
     }
 
     @Override
